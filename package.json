@@ -1,0 +1,14 @@
+{
+  "name": "windows-quiet-hours",
+  "version": "1.0.0",
+  "description": "Checks if Windows 10 quiet hours are active",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nan": "^2.4.0"
+  }
+}
