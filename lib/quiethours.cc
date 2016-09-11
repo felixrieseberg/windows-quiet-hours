@@ -16,7 +16,7 @@ using namespace v8;
 void Method(const v8::FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = Isolate::GetCurrent();
   HandleScope scope(isolate);
-  BOOL isQuietHours = true;
+  bool isQuietHours = true;
 
   #ifdef _WIN32
   HKEY hKey;
