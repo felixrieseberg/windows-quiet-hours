@@ -5,6 +5,8 @@
 #include <windows.h>
 #include <malloc.h>
 #include <stdio.h>
+#else
+#include <stdbool.h>
 #endif
 
 #define PREFERENCE_KEY TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings")
