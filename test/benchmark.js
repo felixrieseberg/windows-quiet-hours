@@ -1,6 +1,6 @@
 const perfy = require('perfy')
 const isQuietHours = require('../lib/index').getIsQuietHours
-const {Key, windef} = require('windows-registry');
+const {Key, windef} = require('windows-registry')
 
 const iterations = process.argv[2] || 100000
 
@@ -8,27 +8,27 @@ const iterations = process.argv[2] || 100000
 const log = console.log
 console.log = function () {}
 
-function getIsQuietHoursThis() {
-  const result = isQuietHours()
+function getIsQuietHoursThis () {
+  isQuietHours()
 }
 
-function getIsQuietHoursWinReg() {
-  const QUIET_HOURS_REGISTRY_KEY = 'NOC_GLOBAL_SETTING_TOASTS_ENABLED';
+function getIsQuietHoursWinReg () {
+  const QUIET_HOURS_REGISTRY_KEY = 'NOC_GLOBAL_SETTING_TOASTS_ENABLED'
 
   try {
     let settingsKey = new Key(
       windef.HKEY.HKEY_CURRENT_USER,
       'Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings',
       windef.KEY_ACCESS.KEY_READ
-    );
+    )
 
-    const result = !!settingsKey.getValue(QUIET_HOURS_REGISTRY_KEY);
+    settingsKey.getValue(QUIET_HOURS_REGISTRY_KEY)
   } catch (error) {
-    return false;
+    return false
   }
 }
 
-function measureThisTime() {
+function measureThisTime () {
   perfy.start('this')
   for (let i = 0; i < iterations; i++) {
     getIsQuietHoursThis()
@@ -37,8 +37,7 @@ function measureThisTime() {
   return perfy.end('this').time
 }
 
-
-function measureWinRegTime() {
+function measureWinRegTime () {
   perfy.start('winreg')
   for (let i = 0; i < iterations; i++) {
     getIsQuietHoursWinReg()
