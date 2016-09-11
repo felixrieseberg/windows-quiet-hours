@@ -36,6 +36,8 @@ void Method(const v8::FunctionCallbackInfo<Value>& args) {
   {
     isQuietHours = false;
   }  
+  #else
+  isQuietHours = false;
   #endif
 
   args.GetReturnValue().Set(Boolean::New(isolate, isQuietHours));
