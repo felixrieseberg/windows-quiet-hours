@@ -35,7 +35,7 @@ void Method(const v8::FunctionCallbackInfo<Value>& args) {
   if (dwValue != 0x00000000)
   {
     isQuietHours = false;
-  }  
+  }
   #else
   isQuietHours = false;
   #endif
