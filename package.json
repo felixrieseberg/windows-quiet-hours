@@ -1,6 +1,6 @@
 {
   "name": "windows-quiet-hours",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Checks if Windows 10 quiet hours are active",
   "main": "lib/index.js",
   "scripts": {
