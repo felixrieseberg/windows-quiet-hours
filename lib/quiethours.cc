@@ -16,7 +16,7 @@ using namespace v8;
 void Method(const v8::FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = Isolate::GetCurrent();
   HandleScope scope(isolate);
-  bool isQuietHours = true;
+  bool isQuietHours = false;
 
   #ifdef _WIN32
   HKEY hKey;
@@ -32,12 +32,10 @@ void Method(const v8::FunctionCallbackInfo<Value>& args) {
     RegCloseKey (hKey);
   }
 
-  if (dwValue != 0x00000000)
+  if (dwValue == 0x00000000)
   {
-    isQuietHours = false;
+    isQuietHours = true;
   }
-  #else
-  isQuietHours = false;
   #endif
 
   args.GetReturnValue().Set(Boolean::New(isolate, isQuietHours));
