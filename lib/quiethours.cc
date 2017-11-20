@@ -21,9 +21,9 @@ void Method(const v8::FunctionCallbackInfo<Value>& args) {
   #ifdef _WIN32
   HKEY hKey;
   LPTSTR lpValueName = "NOC_GLOBAL_SETTING_TOASTS_ENABLED";
-  DWORD dwDefault = 0x00000000;
   LONG lResult;
-  DWORD dwValue, dwType, dwSize = sizeof(dwValue);
+  DWORD dwValue = sizeof(true);
+  DWORD dwType, dwSize = sizeof(dwValue);
   lResult = RegOpenKeyEx(HKEY_CURRENT_USER, PREFERENCE_KEY, 0, KEY_READ, &hKey);
 
   if (lResult == ERROR_SUCCESS)
