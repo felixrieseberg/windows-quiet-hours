@@ -1,5 +1,5 @@
 #include <node.h>
-#include <v8.h>
+#include "nan.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -11,11 +11,8 @@
 
 #define PREFERENCE_KEY TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings")
 
-using namespace v8;
-
-void Method(const v8::FunctionCallbackInfo<Value>& args) {
-  Isolate* isolate = Isolate::GetCurrent();
-  HandleScope scope(isolate);
+NAN_METHOD(Method) {
+  Nan::HandleScope scope;
   bool isQuietHours = false;
 
   #ifdef _WIN32
@@ -38,13 +35,12 @@ void Method(const v8::FunctionCallbackInfo<Value>& args) {
   }
   #endif
 
-  args.GetReturnValue().Set(Boolean::New(isolate, isQuietHours));
+  info.GetReturnValue().Set(Nan::New(isQuietHours));
 }
 
-void Init(Handle<Object> exports) {
-  Isolate* isolate = Isolate::GetCurrent();
-  exports->Set(String::NewFromUtf8(isolate, "isQuietHours"),
-      FunctionTemplate::New(isolate, Method)->GetFunction());
+NAN_MODULE_INIT(Init) {
+  Nan::Set(exports, Nan::New("isQuietHours").ToLocalChecked(),
+      Nan::GetFunction(Nan::New<v8::FunctionTemplate>(Method)).ToLocalChecked());
 }
 
 NODE_MODULE(quiethours, Init)
