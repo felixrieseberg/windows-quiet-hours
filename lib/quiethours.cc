@@ -39,7 +39,7 @@ NAN_METHOD(Method) {
 }
 
 NAN_MODULE_INIT(Init) {
-  Nan::Set(exports, Nan::New("isQuietHours").ToLocalChecked(),
+  Nan::Set(target, Nan::New("isQuietHours").ToLocalChecked(),
       Nan::GetFunction(Nan::New<v8::FunctionTemplate>(Method)).ToLocalChecked());
 }
 
