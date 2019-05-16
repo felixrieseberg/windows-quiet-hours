@@ -2,14 +2,11 @@
   "targets": [
     {
       "target_name": "quiethours",
-      "sources": [ ],
+      "sources": [
+        "lib/quiethours.cc"
+      ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")"
-      ],
-      "conditions": [
-        ['OS=="win"', {
-          "sources": [ "lib/quiethours.cc" ],
-        }]
       ]
     }
   ]

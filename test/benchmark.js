@@ -1,6 +1,6 @@
 const perfy = require('perfy')
 const isQuietHours = require('../lib/index').getIsQuietHours
-const {Key, windef} = require('windows-registry')
+const { Key, windef } = require('windows-registry')
 
 const iterations = process.argv[2] || 100000
 
