@@ -11,7 +11,7 @@
 
 #define PREFERENCE_KEY TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings")
 
-NAN_METHOD(Method) {
+NAN_METHOD(IsQuietHours) {
   Nan::HandleScope scope;
   bool isQuietHours = false;
 
@@ -39,8 +39,11 @@ NAN_METHOD(Method) {
 }
 
 NAN_MODULE_INIT(Init) {
-  Nan::Set(target, Nan::New("isQuietHours").ToLocalChecked(),
-      Nan::GetFunction(Nan::New<v8::FunctionTemplate>(Method)).ToLocalChecked());
+  Nan::SetMethod(target, "isQuietHours", IsQuietHours);
 }
 
+#if NODE_MAJOR_VERSION >= 10
+NAN_MODULE_WORKER_ENABLED(quiethours, Init)
+#else
 NODE_MODULE(quiethours, Init)
+#endif

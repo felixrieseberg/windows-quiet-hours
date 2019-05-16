@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "bindings": "^1.3.0",
-    "nan": "^2.7.0"
+    "nan": "^2.14.0"
   },
   "author": {
     "email": "felix@felixrieseberg.com",
@@ -27,5 +27,8 @@
     "windows",
     "registry",
     "quiet hours"
-  ]
+  ],
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
 }
