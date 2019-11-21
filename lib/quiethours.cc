@@ -1,5 +1,4 @@
-#include <node.h>
-#include "nan.h"
+#include <napi.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -11,8 +10,8 @@
 
 #define PREFERENCE_KEY TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings")
 
-NAN_METHOD(Method) {
-  Nan::HandleScope scope;
+Napi::Boolean Method(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
   bool isQuietHours = false;
 
   #ifdef _WIN32
@@ -35,12 +34,14 @@ NAN_METHOD(Method) {
   }
   #endif
 
-  info.GetReturnValue().Set(Nan::New(isQuietHours));
+  return Napi::Boolean::New(env, isQuietHours);
 }
 
-NAN_MODULE_INIT(Init) {
-  Nan::Set(target, Nan::New("isQuietHours").ToLocalChecked(),
-      Nan::GetFunction(Nan::New<v8::FunctionTemplate>(Method)).ToLocalChecked());
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  exports.Set(Napi::String::New(env, "isQuietHours"),
+              Napi::Function::New(env, Method));
+  return exports;
 }
 
-NODE_MODULE(quiethours, Init)
+NODE_API_MODULE(quiethours, Init)
+
